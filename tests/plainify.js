@@ -42,4 +42,30 @@ QUnit.module('Тестируем функцию plainify', function () {
 
 		assert.deepEqual(plainify(nested2), plain2);
 	});
+
+	QUnit.test('дополнительные тесты plainify', function (assert) {
+		const obj1 = {foo: {}};
+		assert.deepEqual(plainify(obj1), obj1);
+
+		const obj2 = {
+			foo: {
+				bar: {
+					object: {}
+				}
+			}
+		};
+
+		const plain2 = {
+			'foo.bar.object': {}
+		};
+
+		assert.deepEqual(plainify(obj2), plain2);
+
+		assert.deepEqual(plainify({}), {});
+
+		assert.deepEqual(plainify(null), null);
+
+		assert.deepEqual(plainify(Infinity), Infinity);
+
+	});
 });
