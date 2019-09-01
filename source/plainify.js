@@ -1,12 +1,8 @@
 'use strict';
 
-const isEmpty = (obj) => {
-	return Object.keys(obj).length === 0;
-}
+const isEmpty = (obj) =>  Object.keys(obj).length === 0;
 
-const isObject = (obj) => {
-	return typeof obj == "object";
-}
+const isObject = (obj) => typeof obj == "object";
 
 const innerPlainify = (data, level, result) => {
 	for(const prop in data){
