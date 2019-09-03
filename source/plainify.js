@@ -2,25 +2,28 @@
 
 const isEmpty = (obj) =>  Object.keys(obj).length === 0;
 
-const isObject = (obj) => typeof obj == "object";
+const isObject = (obj) => typeof obj === 'object';
 
-const innerPlainify = (data, level, result) => {
-	for(const prop in data){
-		const newLevel = level + prop;
-		if(isObject(data[prop]) && !isEmpty(data[prop])){
-			innerPlainify(data[prop], newLevel + '.', result);
-		} else {			
-			result[newLevel] = data[prop];
+const innerPlainify = (object) => {	
+	let result = {};
+	for (const prop in object) {
+		if (isObject(object[prop]) && !isEmpty(object[prop])) {
+			const newObj =  innerPlainify(object[prop]);
+			for (const newProp in newObj) {
+				result[prop + '.' + newProp] = newObj[newProp];
+			}
+		} else { 
+			result[prop] = object[prop];
 		}
 	}
+	return result;
 };
 
-const plainify = (data) => {
-	if(!isObject(data) || data == null ){
-		return data;
+const plainify = (object) => {
+	if(!isObject(object) || object == null ){
+		return object;
 	}
-
-	let res = {};
-	innerPlainify(data, "", res);
-	return res;
-}
+	
+	return innerPlainify(object);
+	
+};

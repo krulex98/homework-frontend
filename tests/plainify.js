@@ -51,12 +51,14 @@ QUnit.module('Тестируем функцию plainify', function () {
 			foo: {
 				bar: {
 					object: {}
-				}
+				},
+				kek: {}
 			}
 		};
 
 		const plain2 = {
-			'foo.bar.object': {}
+			'foo.bar.object': {},
+			'foo.kek' : {}
 		};
 
 		assert.deepEqual(plainify(obj2), plain2);
