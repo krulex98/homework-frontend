@@ -25,7 +25,7 @@ const isObject = (obj) => typeof obj === 'object';
   * @returns {object}
   */
 const innerPlainify = (object) => {	
-	let result = {};
+	const result = {};
 	for (const prop in object) {
 		if (isObject(object[prop]) && !isEmpty(object[prop])) {
 			const newObj =  innerPlainify(object[prop]);
