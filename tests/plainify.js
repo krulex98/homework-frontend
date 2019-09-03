@@ -69,5 +69,7 @@ QUnit.module('Тестируем функцию plainify', function () {
 
 		assert.deepEqual(plainify(Infinity), Infinity);
 
+		assert.deepEqual(plainify(undefined), undefined);
+
 	});
 });

@@ -27,13 +27,13 @@ const isObject = (obj) => typeof obj === 'object';
 const innerPlainify = (object) => {	
 	const result = {};
 	for (const prop in object) {
-		if (isObject(object[prop]) && !isEmpty(object[prop])) {
-			const newObj =  innerPlainify(object[prop]);
-			for (const newProp in newObj) {
-				result[prop + '.' + newProp] = newObj[newProp];
-			}
-		} else { 
+		if (!isObject(object[prop]) || isEmpty(object[prop])) {
 			result[prop] = object[prop];
+			continue;
+		}
+		const newObj =  innerPlainify(object[prop]);
+		for (const newProp in newObj) {
+			result[prop + '.' + newProp] = newObj[newProp];
 		}
 	}
 	return result;
@@ -47,10 +47,9 @@ const innerPlainify = (object) => {
   * @returns {*}
   */
 const plainify = (data) => {
-	if(!isObject(data) || data == null ){
+	if(!isObject(data) || data === null ){
 		return data;
 	}
 	
 	return innerPlainify(data);
-	
 };
